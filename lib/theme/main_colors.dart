@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TColor {
   static const Color headertext1 = Color(0xff37474F);
   static const Color inputotpcolor = Color(0xfff0f1f2);
+  static const Color green401 = Color(0xff5EC401);
 
   static const Color primary = Color(0xff53B175);
   static const Color primarybutton = Color(0xff1fa309);

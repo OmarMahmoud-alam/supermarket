@@ -20,10 +20,15 @@ class TextStyles {
     fontWeight: FontWeight.w100,
     color: TColor.headertext1.withOpacity(0.7),
   );
+  static const TextStyle textsemibold20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: TColor.headertext1,
+  );
   static const TextStyle textbold16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: TColor.headertext1,
   );
 }
 

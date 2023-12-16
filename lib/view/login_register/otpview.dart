@@ -58,59 +58,55 @@ class _OtpviewState extends State<Otpview> {
 
             SizedBox(
               width: double.infinity,
-              child: isverifyload
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: () async {
-                        setState(() {
-                          isverifyload = true;
-                        });
-                        if (otp.length < 6) {
-                          Get.snackbar('otp', 'complete otp pls');
-                        } else {
-                          Get.log(widget.email);
-                          Get.log(otp);
-                          var result = await DioHelper.postData(
-                              url: 'verifiedby/otp',
-                              token: Apivar.sendtoken,
-                              data: {
-                                "email": widget.email,
-                                "otp": int.parse(otp)
-                              });
-                          if (result.data['code'] == 1) {
-                            Get.snackbar(
-                                'email notification', "email is verified");
-                            await Prefs.setString('token', Apivar.token!);
+              child: ElevatedButton(
+                onPressed: () async {
+                  setState(() {
+                    isverifyload = true;
+                  });
+                  if (otp.length < 6) {
+                    Get.snackbar('otp', 'complete otp pls');
+                  } else {
+                    Get.log(widget.email);
+                    Get.log(otp);
+                    var result = await DioHelper.postData(
+                        url: 'verifiedby/otp',
+                        token: Apivar.sendtoken,
+                        data: {"email": widget.email, "otp": int.parse(otp)});
+                    if (result.data['code'] == 1) {
+                      Get.snackbar('email notification', "email is verified");
+                      await Prefs.setString('token', Apivar.token!);
 
-                            // Get.to(() => Home());
-                          } else {
-                            setState(() {
-                              isverifyload = false;
-                            });
-                            Get.snackbar('otp', result.data.toString());
-                          }
-                        }
-                      },
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.purple),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24.0),
-                          ),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(14.0),
-                        child: Text(
-                          'Verify',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
+                      // Get.to(() => Home());
+                    } else {
+                      setState(() {
+                        isverifyload = false;
+                      });
+                      Get.snackbar('otp', result.data.toString());
+                    }
+                  }
+                },
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(TColor.green401),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24.0),
                     ),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: isverifyload
+                      ? const CircularProgressIndicator()
+                      : Text(
+                          'Next',
+                          style: TextStyles.textmedium20
+                              .copyWith(fontSize: 16, color: Colors.white),
+                        ),
+                ),
+              ),
             )
 
             //Text("Please enter the OTP sent to ${widget.email}"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supermarket/common/utils/dio_helper.dart';
 import 'package:supermarket/common/utils/shered_helper.dart';
+import 'package:supermarket/view/home/home.dart';
 import 'package:supermarket/view/login_register/login.dart';
 
 void main() async {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login(),
+      home: const HomeView(),
     );
   }
 }
