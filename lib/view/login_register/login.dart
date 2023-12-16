@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supermarket/common/common_widget/custom_elevated_button.dart';
-import 'package:supermarket/common/common_widget/custom_text_form_field.dart';
-import 'package:supermarket/common/common_widget/customtextfield.dart';
+
+import 'package:supermarket/common/common_widget/login/customtextfield.dart';
 import 'package:supermarket/common/utils/tt.dart';
 import 'package:gap/gap.dart';
 import 'package:supermarket/common/utils/validation_functions.dart';
 import 'package:supermarket/controller/logincontroller.dart';
 import 'package:supermarket/theme/main_colors.dart';
-import 'package:supermarket/view/login_register/register.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});

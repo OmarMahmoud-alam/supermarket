@@ -13,7 +13,7 @@ class ApiUrl {
 
 class Apivar {
   static String? token;
-  static String get acualtoken => token != null ? 'Bearer $token' : 'empty';
+  static String get sendtoken => token != null ? 'Bearer $token' : 'empty';
 }
 /*
 class KKey {

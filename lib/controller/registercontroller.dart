@@ -6,6 +6,7 @@ import 'package:supermarket/common/utils/dio_helper.dart';
 import 'package:supermarket/common/utils/shered_helper.dart';
 import 'package:supermarket/common/utils/validation_functions.dart';
 import 'package:supermarket/view/login_register/login.dart';
+import 'package:supermarket/view/login_register/otpview.dart';
 import 'package:supermarket/view/login_register/register.dart';
 
 class LoginController extends GetxController {
@@ -51,15 +52,15 @@ class LoginController extends GetxController {
         });
         if (result.data['message'] == 'success') {
           Apivar.token = result.data['accessToken'];
-     
-            Get.snackbar('Register done', 'Register account ave success',
-                backgroundColor: Colors.green
-                , duration:const Duration(seconds :2));
-            await Prefs.setString('token', Apivar.token!);
 
-       
-            //  Get.to(() => Otp2(), arguments: emailcontroller.text.toString());
-          
+          Get.snackbar('Register done', 'Register account ave success',
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2));
+          //  await Prefs.setString('token', Apivar.token!);
+
+          Get.to(() => Otpview(
+                email: emailController.text.toString(),
+              ));
         } else {
           Get.snackbar('error', result.data.toString(),
               backgroundColor: Colors.red,

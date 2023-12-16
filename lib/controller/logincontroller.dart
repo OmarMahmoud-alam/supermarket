@@ -5,6 +5,7 @@ import 'package:supermarket/common/global_variable.dart';
 import 'package:supermarket/common/utils/dio_helper.dart';
 import 'package:supermarket/common/utils/shered_helper.dart';
 import 'package:supermarket/common/utils/validation_functions.dart';
+import 'package:supermarket/view/login_register/otpview.dart';
 import 'package:supermarket/view/login_register/register.dart';
 
 class LoginController extends GetxController {
@@ -46,7 +47,9 @@ class LoginController extends GetxController {
               "/home",
             );
           } else {
-            //  Get.to(() => Otp2(), arguments: emailcontroller.text.toString());
+            Get.to(() => Otpview(
+                  email: emailController.text.toString(),
+                ));
           }
         } else {
           Get.snackbar('error', result.data.toString(),
