@@ -115,7 +115,7 @@ class _CustominputfieldState extends State<Custominputfield> {
               prefixIcon: widget.prefixicon,
               hintText: widget.hintText,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey, width: 1),
+                borderSide: const BorderSide(color: Colors.grey, width: 1),
                 borderRadius: BorderRadius.circular(5),
               ),
             ),

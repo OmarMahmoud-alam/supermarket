@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:supermarket/common/global_variable.dart';
 import 'package:supermarket/common/utils/dio_helper.dart';
-import 'package:supermarket/common/utils/shered_helper.dart';
 import 'package:supermarket/common/utils/validation_functions.dart';
 import 'package:supermarket/view/login_register/login.dart';
 import 'package:supermarket/view/login_register/otpview.dart';
-import 'package:supermarket/view/login_register/register.dart';
 
 class LoginController extends GetxController {
   TextEditingController nameController = TextEditingController();

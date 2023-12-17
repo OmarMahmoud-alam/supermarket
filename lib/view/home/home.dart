@@ -2,128 +2,172 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:supermarket/common/common_widget/cursol.dart';
+import 'package:supermarket/common/common_widget/home/categorywidget.dart';
+import 'package:supermarket/common/common_widget/home/productwidget.dart';
+import 'package:supermarket/common/common_widget/home/shimewidget.dart';
+import 'package:supermarket/controller/homecontroller.dart';
+import 'package:supermarket/model/productmodel.dart';
 import 'package:supermarket/theme/custom_text_style.dart';
-import 'package:supermarket/theme/main_colors.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
+  final HomeController homeController = Get.put(HomeController());
 
 //imagecursl
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              toolbarHeight: 115,
-              floating: true,
-              flexibleSpace: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        const Text(
-                          'Grocify',
-                          style: TextStyles.textsemibold20,
-                        ),
-                        const Spacer(),
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints:
-                                const BoxConstraints(), // override default min size of 48px
-                            style: const ButtonStyle(
-                              tapTargetSize: MaterialTapTargetSize
-                                  .shrinkWrap, // the '2023' part
+        child: FutureBuilder(
+          future: homeController.fetchData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Shimmehomewidget();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              // Display your actual UI once data is loaded
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  SliverAppBar(
+                    toolbarHeight: 115,
+                    floating: true,
+                    flexibleSpace: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 8),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'Grocify',
+                                style: TextStyles.textsemibold20,
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                  padding: EdgeInsets.zero,
+                                  constraints:
+                                      const BoxConstraints(), // override default min size of 48px
+                                  style: const ButtonStyle(
+                                    tapTargetSize: MaterialTapTargetSize
+                                        .shrinkWrap, // the '2023' part
+                                  ),
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.notifications))
+                            ],
+                          ),
+                          const Gap(15),
+                          SizedBox(
+                            height: 50,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  filled: true,
+                                  //fillColor: TColor.,
+                                  prefixIcon: const Icon(Icons.search),
+                                  hintText: 'Search Product',
+                                  hintStyle: TextStyles.textregular14),
                             ),
-                            onPressed: () {},
-                            icon: const Icon(Icons.notifications))
-                      ],
-                    ),
-                    const Gap(15),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            filled: true,
-                            //fillColor: TColor.,
-                            prefixIcon: const Icon(Icons.search),
-                            hintText: 'Search Product',
-                            hintStyle: TextStyles.textregular14),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            /* const SliverToBoxAdapter(
-                child: CarouslImages(
-                  imagesList: imagecursl,
-                ),
-              ),*/
-            /*    SliverToBoxAdapter(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Category',
-                  style: safeGoogleFont(
-                    'Poppins',
-                    height: 1.5,
-                    fontSize: 14,
-                    letterSpacing: 0.5,
-                    fontWeight: FontWeight.w700,
-                    color: TColor.primary,
                   ),
-                ),
-              )),
-              SliverToBoxAdapter(
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
+                  SliverToBoxAdapter(
+                    child: CarouslImagesBanner(
+                      banners: homeController.banners,
+                    ),
+                  ),
+                  //category text
+                  SliverToBoxAdapter(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
-                        children: categoryimage.map((e) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 15),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.to(() => const CategoryProductview());
-                              },
-                              child: CircleAvatar(
-                                radius: 40,
-                                backgroundImage: AssetImage(e),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            SizedBox(
-                              width: 65,
-                              child: Text(
-                                'Category Name ',
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: safeGoogleFont(
-                                  'Poppins',
-                                  fontSize: 12,
-                                  letterSpacing: 0.5,
-                                  color: TColor.title3,
-                                ),
-                              ),
-                            )
-                          ],
+                      children: [
+                        const Text(
+                          'Category',
+                          //  style: TextStyles.textbold16
                         ),
-                      );
-                    }).toList())),
-              ),
+                        const Spacer(),
+                        TextButton(
+                            onPressed: () {}, child: const Text('see more'))
+                      ],
+                    ),
+                  )),
+                  //categories row
+                  SliverToBoxAdapter(
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                            children:
+                                homeController.categories.map((categoryitem) {
+                          return CategoryCircleAvator(
+                            category: categoryitem,
+                          );
+                        }).toList())),
+                  ),
+                  //top seller product
+                  const SliverToBoxAdapter(
+                      child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'TopsellProduct',
+                      //  style: TextStyles.textbold16
+                    ),
+                  )),
+                  SliverToBoxAdapter(
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                            children:
+                                homeController.products.map((productitem) {
+                          return homeproductwidget(
+                            productitem: productitem,
+                          );
+                        }).toList())),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15.0, top: 20),
+                      child: Text(
+                        'You May Like ',
+                      ),
+                    ),
+                  ),
+                  SliverGrid(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 0.0,
+                        mainAxisSpacing: 0.0,
+                        childAspectRatio: 0.82,
+                      ),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        ProductModel productitem =
+                            homeController.products[index];
+                        return homeproductwidget(
+                          productitem: productitem,
+                        );
+                      })),
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}/* CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+          
+            /*    
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -136,142 +180,7 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0, top: 20),
-                  child: Text(
-                    'Flash Sale',
-                    style: safeGoogleFont(
-                      'Poppins',
-                      height: 1.5,
-                      fontSize: 14,
-                      letterSpacing: 0.5,
-                      fontWeight: FontWeight.bold,
-                      color: TColor.primary,
-                    ),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    child: Row(
-                        children: productimages.map((e) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 15),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 141,
-                              child: InkWell(
-                                onTap: () {
-                                  Get.to(() => const ProductdetialsView());
-                                },
-                                child: Stack(
-                                  children: [
-                                    Image.asset(
-                                      e,
-                                      width: 141,
-                                      height: 141,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Positioned(
-                                        top: 2,
-                                        left: 3,
-                                        child: IconButton(
-                                            padding: EdgeInsets.zero,
-                                            constraints:
-                                                const BoxConstraints(), // override default min size of 48px
-                                            style: const ButtonStyle(
-                                              tapTargetSize: MaterialTapTargetSize
-                                                  .shrinkWrap, // the '2023' part
-                                            ),
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              Icons.favorite_outline,
-                                              color: Colors.white,
-                                            )))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Gap(7),
-                            SizedBox(
-                              width: 140,
-                              child: Text(
-                                'FS - Nike Air Max 270 React',
-                                //textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: safeGoogleFont(
-                                  'Poppins',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                  color: TColor.textTittle,
-                                ),
-                              ),
-                            ),
-                            const Gap(7),
-                            SizedBox(
-                              width: 140,
-                              child: Text(
-                                "\$299,43",
-                                //textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: safeGoogleFont(
-                                  'Poppins',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                  color: TColor.title3,
-                                ),
-                              ),
-                            ),
-                            const Gap(7),
-                            SizedBox(
-                              width: 141,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "\$534,33",
-                                    //textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: safeGoogleFont(
-                                      'Poppins',
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal,
-                                      decoration: TextDecoration.lineThrough,
-                                      letterSpacing: 0.5,
-                                      color: TColor.secondarytext,
-                                    ),
-                                  ),
-                                  const Gap(7),
-                                  Text(
-                                    "24% Off",
-                                    //textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: safeGoogleFont('Poppins',
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 0.5,
-                                        color: TColor.bink,
-                                        height: 1.5),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    }).toList())),
-              ),
+              
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15.0, top: 20),
@@ -428,7 +337,4 @@ class HomeView extends StatelessWidget {
           */
           ],
         ),
-      ),
-    );
-  }
-}
+    */
