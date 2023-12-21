@@ -19,7 +19,7 @@ class ProductModel {
       required this.type,
       required this.quantity,
       required this.category,
-      required this.favorite,
+      this.favorite = false,
       required this.categoryId,
       required this.imageUrl,
       this.total});
@@ -33,7 +33,7 @@ class ProductModel {
         type: json['type'],
         quantity: json['quantity'],
         category: json['category'],
-        favorite: json['favorite'],
+        favorite: json['favorite'] ?? false,
         categoryId: json['category_id'],
         imageUrl: json['image_url'],
         total: json['total']);
@@ -53,5 +53,4 @@ class ProductModel {
       'favorite': favorite,
     };
   }
-  
 }

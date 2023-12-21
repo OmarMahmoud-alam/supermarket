@@ -50,7 +50,7 @@ class _OtpviewState extends State<Otpview> {
                 ),
                 fieldStyle: FieldStyle.box,
                 outlineBorderRadius: 8,
-                style: TextStyle(fontSize: 17),
+                style: const TextStyle(fontSize: 17),
                 onChanged: (pin) {},
                 onCompleted: (pin) {
                   otp = pin;
@@ -97,7 +97,7 @@ class _OtpviewState extends State<Otpview> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(14.0),
+                  padding: const EdgeInsets.all(14.0),
                   child: isverifyload
                       ? const CircularProgressIndicator()
                       : Text(

@@ -14,11 +14,11 @@ class ProductController extends GetxController {
         // Convert the JSON response to a Product object
         product = Productdetails.fromJson(result.data['data']);
       } else {
-        print('Error: ${result.statusCode}');
+        Get.log('Error: ${result.statusCode}');
         // Handle the error as needed
       }
     } catch (e) {
-      print('Error: $e');
+      Get.log('Error: $e');
       // Handle the error as needed
     }
   }

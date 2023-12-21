@@ -15,7 +15,6 @@ class LoginController extends GetxController {
   var isregisterLoad = false;
 
   Future<void> registerWithEmail() async {
-    // TODO: implement registerWithEmail
     if (emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         nameController.text.isEmpty) {

@@ -5,19 +5,19 @@ class Review {
   int id;
   int userId;
   int productId;
-  String comment;
+  String? comment;
   int rating;
-  DateTime createdAt;
-  User user;
+  DateTime? createdAt;
+  User? user;
 
   Review({
     required this.id,
     required this.userId,
     required this.productId,
-    required this.comment,
+    this.comment,
     required this.rating,
-    required this.createdAt,
-    required this.user,
+     this.createdAt,
+    this.user,
   });
 
   factory Review.fromJson(Map<String, dynamic> json) {
@@ -39,12 +39,11 @@ class Review {
       'product_id': productId,
       'comment': comment,
       'rating': rating,
-      'created_at': createdAt.toIso8601String(),
-      'user': user.toJson(),
+      'created_at': createdAt!.toIso8601String(),
     };
   }
 
   String revieWritedate() {
-    return DateFormat('MMMM dd, yyyy').format(createdAt);
+    return DateFormat('MMMM dd, yyyy').format(createdAt!);
   }
 }

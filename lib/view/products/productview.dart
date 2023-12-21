@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:supermarket/common/common_widget/home/shimewidget.dart';
 import 'package:supermarket/controller/productderailscontroller.dart';
 import 'package:supermarket/model/productdetailsmodel.dart';
-import 'package:supermarket/model/productmodel.dart';
 import 'package:supermarket/theme/main_colors.dart';
 
 class ProductdetialsView extends StatelessWidget {
@@ -82,8 +80,8 @@ class ProductdetialsView extends StatelessWidget {
                           allowHalfRating: true,
                           itemCount: 5,
                           itemSize: 16,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 1.9),
-                          itemBuilder: (context, _) => Icon(
+                          itemPadding: const EdgeInsets.symmetric(horizontal: 1.9),
+                          itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
@@ -116,7 +114,7 @@ class ProductdetialsView extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Gap(10),
+                        const Gap(10),
                         Text(
                           product.description ??
                               'The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience.',
@@ -133,7 +131,7 @@ class ProductdetialsView extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               'Review Product',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -148,7 +146,7 @@ class ProductdetialsView extends StatelessWidget {
                                 onPressed: () {
                                   //Get.to(() => ReviewView());
                                 },
-                                child: Text(
+                                child: const Text(
                                   'See More',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -168,8 +166,8 @@ class ProductdetialsView extends StatelessWidget {
                                 itemCount: 5,
                                 itemSize: 16,
                                 itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 1.5),
-                                itemBuilder: (context, _) => Icon(
+                                    const EdgeInsets.symmetric(horizontal: 1.5),
+                                itemBuilder: (context, _) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,
                                 ),
@@ -178,11 +176,11 @@ class ProductdetialsView extends StatelessWidget {
                                 },
                               ),
                             ),
-                            Gap(5),
+                            const Gap(5),
                             Text(
                               product.averageRate.toStringAsFixed(2),
                             ),
-                            Gap(2),
+                            const Gap(2),
                             Text(
                               '(${product.reviews.length} Review)',
                             )
@@ -199,14 +197,14 @@ class ProductdetialsView extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                     backgroundImage: AssetImage(
                                         'assets/images/person/a1.png')),
-                                Gap(12),
+                                const Gap(12),
                                 Column(
                                   children: [
                                     Text(
-                                      product.reviews[0].user.name,
+                                      product.reviews[0].user!.name,
                                     ),
                                     RatingBar.builder(
                                       ignoreGestures: true,
@@ -218,8 +216,8 @@ class ProductdetialsView extends StatelessWidget {
                                       itemCount: 5,
                                       itemSize: 16,
                                       itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 1.5),
-                                      itemBuilder: (context, _) => Icon(
+                                          const EdgeInsets.symmetric(horizontal: 1.5),
+                                      itemBuilder: (context, _) => const Icon(
                                         Icons.star,
                                         color: Colors.amber,
                                       ),
@@ -234,10 +232,10 @@ class ProductdetialsView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0, left: 5),
                               child: Text(
-                                product.reviews[0].comment,
+                                product.reviews[0].comment??'',
                               ),
                             ),
-                            Gap(21),
+                            const Gap(21),
                             Container(
                               padding: const EdgeInsets.only(left: 5),
                               width: double.infinity,
@@ -250,9 +248,9 @@ class ProductdetialsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                           left: 15.0, top: 15, bottom: 10),
                       child: Text(
                         'You Might Also Like ',
@@ -411,7 +409,6 @@ class ProductdetialsView extends StatelessWidget {
               );
             }
           },
-        )
-         );
+        ));
   }
 }

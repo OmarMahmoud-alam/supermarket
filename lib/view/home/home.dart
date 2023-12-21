@@ -100,16 +100,13 @@ class HomeView extends StatelessWidget {
                   )),
                   //categories row
                   SliverToBoxAdapter(
-                    child: SingleChildScrollView(
+                    child: ListView.builder(
                         scrollDirection: Axis.horizontal,
+                        itemCount: homeController.categories.length,
                         physics: const BouncingScrollPhysics(),
-                        child: Row(
-                            children:
-                                homeController.categories.map((categoryitem) {
-                          return CategoryCircleAvator(
-                            category: categoryitem,
-                          );
-                        }).toList())),
+                        itemBuilder: (context, index) => CategoryCircleAvator(
+                              category: homeController.categories[index],
+                            )),
                   ),
                   //top seller product
                   const SliverToBoxAdapter(
@@ -121,20 +118,17 @@ class HomeView extends StatelessWidget {
                     ),
                   )),
                   SliverToBoxAdapter(
-                    child: SingleChildScrollView(
+                    child: ListView.builder(
                         scrollDirection: Axis.horizontal,
+                        itemCount: homeController.products.length,
                         physics: const BouncingScrollPhysics(),
-                        child: Row(
-                            children:
-                                homeController.products.map((productitem) {
-                          return homeproductwidget(
-                            productitem: productitem,
-                          );
-                        }).toList())),
+                        itemBuilder: (context, index) => homeproductwidget(
+                              productitem: homeController.products[index],
+                            )),
                   ),
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15.0, top: 20),
+                      padding: EdgeInsets.only(left: 15.0, top: 20),
                       child: Text(
                         'You May Like ',
                       ),

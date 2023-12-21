@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:supermarket/model/productmodel.dart';
 
+// ignore: camel_case_types
 class homeproductwidget extends StatelessWidget {
   final ProductModel productitem;
   const homeproductwidget({

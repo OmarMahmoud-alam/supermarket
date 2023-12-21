@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:supermarket/common/global_variable.dart';
 import 'package:supermarket/common/utils/dio_helper.dart';
 import 'package:supermarket/common/utils/shered_helper.dart';
@@ -15,8 +14,7 @@ class LoginController extends GetxController {
   var isloginLoad = false;
 
   Future<void> loginWithEmail() async {
-    // TODO: implement loginWithEmail
-    print("Login With Email");
+    Get.log("Login With Email");
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       Get.snackbar(
         'login error',

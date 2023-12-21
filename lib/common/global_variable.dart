@@ -6,6 +6,9 @@ class ApiUrl {
   static const login = 'auth/login';
   static const signUp = 'sign_up';
   static const home = 'home';
+  static const postreview = 'product/review';
+  static const getmyreview = 'product/review';
+  static const getallreview = 'home';
   static const productDetail = 'product_detail';
   static const addRemoveFavorite = 'add_remove_favorite';
   static const favorite = 'favorite_list';

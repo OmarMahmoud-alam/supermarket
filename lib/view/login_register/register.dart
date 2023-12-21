@@ -45,7 +45,7 @@ class RegisterView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Custominputfield(
-              prefixicon: Icon(
+              prefixicon: const Icon(
                 Icons.person,
               ),
               textInputType: TextInputType.emailAddress,
@@ -62,7 +62,7 @@ class RegisterView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Custominputfield(
-              prefixicon: Icon(
+              prefixicon: const Icon(
                 Icons.email,
               ),
               textInputType: TextInputType.emailAddress,
@@ -79,7 +79,7 @@ class RegisterView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Custominputfield(
-              prefixicon: Icon(
+              prefixicon: const Icon(
                 Icons.lock,
               ),
               textInputType: TextInputType.emailAddress,
@@ -100,7 +100,7 @@ class RegisterView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Custominputfield(
-              prefixicon: Icon(
+              prefixicon: const Icon(
                 Icons.lock,
               ),
               textInputType: TextInputType.emailAddress,
