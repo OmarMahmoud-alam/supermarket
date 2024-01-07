@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:supermarket/common/utils/dio_helper.dart';
-import 'package:supermarket/common/utils/shered_helper.dart';
-import 'package:supermarket/view/home/home.dart';
+import 'package:supermarket/core/common/app_strings.dart';
+import 'package:supermarket/core/common/utils/dio_helper.dart';
+import 'package:supermarket/core/common/utils/shered_helper.dart';
+import 'package:supermarket/features/auth/presentation/view/screen/login.dart';
+import 'package:supermarket/features/home/presentation/view/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +20,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home:  HomeView(),
+    Apivar.token = Prefs.getString('token');
+
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      // Use builder only if you need to use library outside ScreenUtilInit context
+      builder: (_, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          // You can use the library anywhere in the app even in theme
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            useMaterial3:
+                true, //  textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+          ),
+          home: child,
+        );
+      },
+      child: (Apivar.sendtoken == null) ? const Login() : HomeView(),
     );
   }
 }
